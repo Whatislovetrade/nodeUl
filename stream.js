@@ -21,11 +21,21 @@ const path = require("path")
 
 // stream.on()
 
-const writableStream = fs.createWriteStream(path.resolve(__dirname, "test2.txt"))
+// const writableStream = fs.createWriteStream(path.resolve(__dirname, "test2.txt"))
 
-for (let i = 0; i < 20; i++) {
-    writableStream.write(i + "\n")
-}
+// for (let i = 0; i < 20; i++) {
+//     writableStream.write(i + "\n")
+// }
 
-writableStream.end()
+// writableStream.end()
 
+
+http.createServer((req, res) => {
+    const stream = fs.createWriteStream(path.resolve(__dirname, "file.txt"))
+
+
+    // stream.on("data", chunk => res.write(chunk))
+    // stream.on("end", chunk => res.end())
+
+    stream.pipe(res)
+})
